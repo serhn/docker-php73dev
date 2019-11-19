@@ -1,7 +1,19 @@
 FROM php:7.3-fpm-alpine
-RUN apt update && apt install -y libpng-dev libsqlite3-dev libjpeg62-turbo-dev libfreetype6-dev
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
-RUN docker-php-ext-install pdo pdo_sqlite exif pdo_mysql mysqli gd
+
+RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev && \
+        docker-php-ext-configure gd \
+        --with-gd \
+        --with-freetype-dir=/usr/include/ \
+        --with-png-dir=/usr/include/ \
+        --with-jpeg-dir=/usr/include/
+
+RUN docker-php-ext-install exif pdo_mysql mysqli gd
+
+RUN apk add --no-cache imagemagick-dev && yes | pecl install imagick && docker-php-ext-enable imagick
+
+
+
+
 
 #RUN apt-get update -y && apt-get install -y libpng-dev libsqlite3-dev libjpeg62-turbo-dev libfreetype6-dev 
 #RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ 
