@@ -6,7 +6,10 @@ RUN set -ex \
     && pecl install imagick-3.4.3 \
     && docker-php-ext-enable imagick \
     && apk add --no-cache --virtual .imagick-runtime-deps imagemagick \
-    && apk del .phpize-deps
+    && apk del .phpize-deps \
+    && apk del imagemagick-dev \
+    && apk del libtool \
+    && rm -rf /tmp/* /var/cache/apk/*
     
 RUN docker-php-ext-install pdo_mysql 
 
