@@ -7,9 +7,9 @@ RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev lib
         --with-png-dir=/usr/include/ \
         --with-jpeg-dir=/usr/include/
 
-RUN docker-php-ext-install exif pdo_mysql mysqli gd
+RUN docker-php-ext-install exif pdo_mysql gd
 
-RUN apk add --no-cache imagemagick-dev && yes | pecl install imagick && docker-php-ext-enable imagick
+#RUN apk add --no-cache imagemagick-dev && yes | pecl install imagick && docker-php-ext-enable imagick
 
 
 
