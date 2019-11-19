@@ -1,11 +1,12 @@
 FROM php:7.3-fpm
-RUN apt-get update -y && apt-get install -y libpng-dev libsqlite3-dev libjpeg62-turbo-dev libfreetype6-dev 
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ 
-RUN docker-php-ext-install gd pdo pdo_sqlite exif pdo_mysql mysqli
+#RUN apt-get update -y && apt-get install -y libpng-dev libsqlite3-dev libjpeg62-turbo-dev libfreetype6-dev 
+#RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ 
+#RUN docker-php-ext-install gd
+#RUN docker-php-ext-install pdo pdo_sqlite exif pdo_mysql mysqli
 
 #PGSQL BEGIN
-RUN apt-get install -y libpq-dev
-RUN docker-php-ext-install pdo_pgsql
+#RUN apt-get install -y libpq-dev
+#RUN docker-php-ext-install pdo_pgsql
 #PGSQL END
 
 #RUN apt-get install -y mysql-client
@@ -31,9 +32,9 @@ RUN php /tmp/composer-setup.php
 RUN mv composer.phar /usr/local/bin/composer
 RUN rm /tmp/composer-setup.php
 
-RUN apt-get install -y libmagickwand-dev
-RUN pecl install imagick-beta
-RUN echo "extension=imagick.so" > /usr/local/etc/php/conf.d/ext-imagick.ini
+#RUN apt-get install -y libmagickwand-dev
+#RUN pecl install imagick-beta
+#RUN echo "extension=imagick.so" > /usr/local/etc/php/conf.d/ext-imagick.ini
 
 
 #RUN pecl install xdebug
@@ -49,15 +50,15 @@ RUN echo "extension=imagick.so" > /usr/local/etc/php/conf.d/ext-imagick.ini
 #RUN echo "mailhub=mailcatcher:1025\nUseTLS=NO\nFromLineOverride=YES" > /etc/ssmtp/ssmtp.conf
 
 
-RUN echo  "\
-syntax on \n\
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP \n\
-set number \n\
-:set encoding=utf-8 \n\
-:set fileencoding=utf-8"  >> /root/.vimrc
+#RUN echo  "\
+#syntax on \n\
+#autocmd FileType php set omnifunc=phpcomplete#CompletePHP \n\
+#set number \n\
+#:set encoding=utf-8 \n\
+#:set fileencoding=utf-8"  >> /root/.vimrc
 
-RUN apt-get -y install cron
-RUN touch /etc/cron.d/crontab
-RUN chmod 0644 /etc/cron.d/crontab
+#RUN apt-get -y install cron
+#RUN touch /etc/cron.d/crontab
+#RUN chmod 0644 /etc/cron.d/crontab
 #CMD ["cron", "-f"]
-ENTRYPOINT ["docker-php-entrypoint"]
+#ENTRYPOINT ["docker-php-entrypoint"]
