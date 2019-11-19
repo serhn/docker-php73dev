@@ -60,3 +60,4 @@ RUN apt-get -y install cron
 RUN touch /etc/cron.d/crontab
 RUN chmod 0644 /etc/cron.d/crontab
 #CMD ["cron", "-f"]
+ENTRYPOINT ["docker-php-entrypoint"]
