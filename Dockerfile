@@ -1,13 +1,17 @@
 FROM php:7.3-fpm-alpine
 
+       
 RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev && \
-        docker-php-ext-configure gd \
-        --with-gd \
-        --with-freetype-dir=/usr/include/ \
-        --with-png-dir=/usr/include/ \
-        --with-jpeg-dir=/usr/include/
+  docker-php-ext-configure gd \
+    --with-gd \
+    --with-freetype-dir=/usr/include/ \
+    --with-png-dir=/usr/include/ \
+    --with-jpeg-dir=/usr/include/ && \
+  NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
+  docker-php-ext-install -j${NPROC} gd && \
+  apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
 
-RUN docker-php-ext-install exif pdo_mysql gd
+RUN docker-php-ext-install exif pdo_mysql
 RUN apk add --no-cache libzip-dev && docker-php-ext-configure zip --with-libzip=/usr/include && docker-php-ext-install zip
 
 RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
@@ -17,3 +21,6 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
 RUN php /tmp/composer-setup.php
 RUN mv composer.phar /usr/local/bin/composer
 RUN rm /tmp/composer-setup.php
+
+RUN rm -rf /tmp/* /var/cache/apk/*
+
