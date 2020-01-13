@@ -23,14 +23,38 @@ RUN mv composer.phar /usr/local/bin/composer
 RUN rm /tmp/composer-setup.php
 
 RUN apk add --no-cache  supervisor
-#RUN echo "[program:theprogramname] \n\
-#command=/bin/cat          \n\
-#numprocs=1" > /etc/supervisor.d/php.ini 
-
-
-
 
 RUN rm -rf /tmp/* /var/cache/apk/*
 
-#CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+RUN mv supervisord.conf  supervisord.conf.back
+#RUN echo "[program:theprogramname] \n\
+#command=/bin/cat          \n\
+#numprocs=1" > /etc/supervisor.d/php.ini 
+RUN echo "'\n\
+[supervisord]\n\
+nodaemon=true\n\
+\n\
+[program:php-fpm]\n\
+command=php-fpm -F\n\
+stdout_logfile=/dev/stdout\n\
+stdout_logfile_maxbytes=0\n\
+stderr_logfile=/dev/stderr\n\
+stderr_logfile_maxbytes=0\n\
+autorestart=true\n\
+startretries=0\n\
+\n\
+[program:phpjob]\n\
+command=php artisan queue:work\n\
+numprocs=1\n\
+directory=/usr/share/nginx\n\
+autostart=true\n\
+autorestart=true\n\
+stdout_logfile=/dev/stdout\n\
+stderr_logfile=/dev/stderr\n\
+\n'" > /etc/supervisord.conf
+
+
+
+
+ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
 
