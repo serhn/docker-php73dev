@@ -26,7 +26,7 @@ RUN apk add --no-cache  supervisor
 
 RUN rm -rf /tmp/* /var/cache/apk/*
 
-RUN mv supervisord.conf  supervisord.conf.back
+RUN mv /etc/supervisord.conf  /etc/supervisord.conf.back
 #RUN echo "[program:theprogramname] \n\
 #command=/bin/cat          \n\
 #numprocs=1" > /etc/supervisor.d/php.ini 
