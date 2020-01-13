@@ -23,9 +23,9 @@ RUN mv composer.phar /usr/local/bin/composer
 RUN rm /tmp/composer-setup.php
 
 RUN apk add --no-cache  supervisor
-RUN echo "[program:theprogramname] \n\
-command=/bin/cat          \n\
-numprocs=1" > /etc/supervisor.d/php.ini 
+#RUN echo "[program:theprogramname] \n\
+#command=/bin/cat          \n\
+#numprocs=1" > /etc/supervisor.d/php.ini 
 
 
 
