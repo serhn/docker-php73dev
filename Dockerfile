@@ -30,7 +30,7 @@ RUN mv /etc/supervisord.conf  /etc/supervisord.conf.back
 #RUN echo "[program:theprogramname] \n\
 #command=/bin/cat          \n\
 #numprocs=1" > /etc/supervisor.d/php.ini 
-RUN echo "'\n\
+RUN echo "\n\
 [supervisord]\n\
 nodaemon=true\n\
 \n\
@@ -51,7 +51,7 @@ autostart=true\n\
 autorestart=true\n\
 stdout_logfile=/dev/stdout\n\
 stderr_logfile=/dev/stderr\n\
-\n'" > /etc/supervisord.conf
+\n" > /etc/supervisord.conf
 
 
 
