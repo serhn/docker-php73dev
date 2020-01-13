@@ -30,9 +30,9 @@ RUN mv /etc/supervisord.conf  /etc/supervisord.conf.back
 #RUN echo "[program:theprogramname] \n\
 #command=/bin/cat          \n\
 #numprocs=1" > /etc/supervisor.d/php.ini 
-RUN echo "[supervisord]\nnodaemon=true\n" > /etc/supervisord.conf
-RUN echo "[program:php-fpm]\ncommand=php-fpm -F\nstdout_logfile=/dev/stdout\nstdout_logfile_maxbytes=0\nstderr_logfile=/dev/stderr\nstderr_logfile_maxbytes=0\nautorestart=true\nstartretries=0\n" >> /etc/supervisord.conf
-RUN echo "[program:phpjob]\ncommand=php artisan queue:work\nnumprocs=1\ndirectory=/usr/share/nginx\nautostart=true\nautorestart=true\nstdout_logfile=/dev/stdout\nstderr_logfile=/dev/stderr\n" >> /etc/supervisord.conf
+RUN echo -e "[supervisord]\nnodaemon=true\n" > /etc/supervisord.conf
+RUN echo -e "[program:php-fpm]\ncommand=php-fpm -F\nstdout_logfile=/dev/stdout\nstdout_logfile_maxbytes=0\nstderr_logfile=/dev/stderr\nstderr_logfile_maxbytes=0\nautorestart=true\nstartretries=0\n" >> /etc/supervisord.conf
+RUN echo -e "[program:phpjob]\ncommand=php artisan queue:work\nnumprocs=1\ndirectory=/usr/share/nginx\nautostart=true\nautorestart=true\nstdout_logfile=/dev/stdout\nstderr_logfile=/dev/stderr\n" >> /etc/supervisord.conf
 
 
 
