@@ -28,5 +28,9 @@ command=/bin/cat          \n\
 numprocs=1" > /etc/supervisor.d/php.ini 
 
 
+
+
 RUN rm -rf /tmp/* /var/cache/apk/*
+
+#CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
