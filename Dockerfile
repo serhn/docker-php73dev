@@ -37,5 +37,5 @@ RUN echo -e "[program:phpjob]\ncommand=php artisan queue:work\nnumprocs=1\ndirec
 
 
 
-#ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
+ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
 
