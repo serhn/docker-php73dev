@@ -12,6 +12,7 @@ RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev lib
   apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
 
 RUN docker-php-ext-install exif pdo_mysql
+RUN docker-php-ext-install mysqli
 RUN apk add --no-cache libzip-dev && docker-php-ext-configure zip --with-libzip=/usr/include && docker-php-ext-install zip
 
 RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
