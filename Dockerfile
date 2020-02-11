@@ -32,7 +32,7 @@ RUN rm -rf /tmp/* /var/cache/apk/*
 RUN mv /etc/supervisord.conf  /etc/supervisord.conf.back
 RUN echo -e "[supervisord]\nnodaemon=true\n" > /etc/supervisord.conf
 RUN echo -e "[program:php-fpm]\ncommand=php-fpm -F\nstdout_logfile=/dev/stdout\nstdout_logfile_maxbytes=0\nstderr_logfile=/dev/stderr\nstderr_logfile_maxbytes=0\nautorestart=true\nstartretries=0\n" >> /etc/supervisord.conf
-RUN echo -e "[program:phpjob]\ncommand=php artisan queue:work\nuser=www-data\nnumprocs=1\ndirectory=/usr/share/nginx\nautostart=true\nautorestart=true\nstdout_logfile=/dev/stdout\nstderr_logfile=/dev/stderr\n" >> /etc/supervisord.conf
+RUN echo -e "[program:phpjob]\ncommand=php artisan queue:work --tries=3\nuser=www-data\nnumprocs=1\ndirectory=/usr/share/nginx\nautostart=true\nautorestart=true\nstdout_logfile=/dev/stdout\nstderr_logfile=/dev/stderr\n" >> /etc/supervisord.conf
 
 
 
