@@ -37,6 +37,8 @@ RUN rm /tmp/composer-setup.php
 
 RUN apk add --no-cache  supervisor
 
+RUN apk add --no-cache poppler-utils
+
 RUN rm -rf /tmp/* /var/cache/apk/*
 
 RUN echo '* * * * * cd /usr/share/nginx && php artisan schedule:run >> /dev/null 2>&1' > /etc/crontabs/www-data
