@@ -37,7 +37,6 @@ RUN rm /tmp/composer-setup.php
 
 RUN apk add --no-cache  supervisor
 
-RUN pecl install -o -f redis && docker-php-ext-enable redis
 
 RUN rm -rf /tmp/* /var/cache/apk/*
 
