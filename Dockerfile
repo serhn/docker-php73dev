@@ -36,7 +36,7 @@ RUN mv composer.phar /usr/local/bin/composer
 RUN rm /tmp/composer-setup.php
 
 RUN apk add --no-cache  supervisor
-
+RUN apk add --no-cache  git
 
 RUN rm -rf /tmp/* /var/cache/apk/*
 
